@@ -30,3 +30,35 @@
 *.exe
 *.out
 *.app
+
+# Qt Template files
+build-*-Debug
+build-*-Release
+Makefile*
+*.pro.user
+*.pro.*.user
+*.pro.user.*
+*.gch
+moc_*
+ui_*
+
+# VS files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.user
+*.VC.*
+*.pdb
+
+# debug and release
+Debug
+Release
+debug
+release
+
+# others
+dist
+tmp
+temp
+bin
+.*
