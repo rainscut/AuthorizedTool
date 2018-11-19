@@ -75,8 +75,6 @@ int main(int argc, char *argv[])
            "  private key: %s\n",
            pubKeyPath.c_str(), priKeyPath.c_str());
 
-    getchar();
-
     return 0;
 }
 

@@ -22,7 +22,7 @@ static void get_cpuinfo(unsigned int ext, unsigned int out[]) {
 #endif
 
 #ifdef _WIN32
-    __cpuid(out, ext);
+    __cpuid((int*)out, ext);
 #endif
 }
 
