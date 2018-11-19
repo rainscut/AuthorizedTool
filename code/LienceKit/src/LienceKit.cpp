@@ -4,6 +4,7 @@
 #include <algorithm>  // max
 #include <random>
 #include <time.h>
+#include <string.h>
 
 #include "EncryptKit.h"
 

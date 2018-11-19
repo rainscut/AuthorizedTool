@@ -1,5 +1,6 @@
 ﻿#include <stdio.h>
 #include "EncryptKit.h"
+#include <string.h>
 
 void testCpu() {
     std::string id = encrypt_kit::getCpuId();
@@ -56,11 +57,11 @@ void testMemRsa() {
 
 int main(int argc, char *argv[])
 {
-    testMemRsa();
     testCpu();
+    testMemRsa();
 
-    const char* pub = "ras_pub.key";
-    const char* pri = "ras_pri.key";
+    const char* pub = "rsa_pub.key";
+    const char* pri = "rsa_pri.key";
     if (!encrypt_kit::rsaCreateKey(pub, pri)) {
         printf("create key failed\n");
         return -1;

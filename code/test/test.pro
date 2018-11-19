@@ -10,5 +10,12 @@ SOURCES += main.cpp
 
 INCLUDEPATH += ../EncryptKit/inc/
 LIBS += -L$$VAR_LIBSDIR -lEncryptKit
-PRE_TARGETDEPS += $$VAR_LIBSDIR/EncryptKit.lib
-LIBS += -ladvapi32 -luser32
+
+win32 {
+    PRE_TARGETDEPS += $$VAR_LIBSDIR/EncryptKit.lib
+    LIBS += -ladvapi32 -luser32
+}
+unix {
+    PRE_TARGETDEPS += $$VAR_LIBSDIR/libEncryptKit.a
+    LIBS += -lpthread
+}

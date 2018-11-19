@@ -6,11 +6,20 @@ CONFIG -= qt
 include (../../public.pri)
 DESTDIR = $$VAR_BINDIR
 
+SOURCES += \
+    $$PWD/main.cpp
+
+
 # libs
 INCLUDEPATH += ../../LienceKit/inc/
 LIBS += -L$$VAR_LIBSDIR -lLienceKit
-PRE_TARGETDEPS += $$VAR_LIBSDIR/LienceKit.lib
-LIBS += -ladvapi32 -luser32
 
-SOURCES += \
-    $$PWD/main.cpp
+win32 {
+    LIBS += -ladvapi32 -luser32
+    PRE_TARGETDEPS += $$VAR_LIBSDIR/LienceKit.lib
+}
+unix {
+    PRE_TARGETDEPS += $$VAR_LIBSDIR/libLienceKit.a
+    LIBS += -lpthread
+}
+

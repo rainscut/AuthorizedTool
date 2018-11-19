@@ -1,15 +1,17 @@
 ﻿#include <stdio.h>
-#include <direct.h>
 #include <stdlib.h>
 #include <string>
 #include <algorithm>  // max
 
 #if defined _WIN32
+#include <direct.h>
 # include <io.h>
 # define access _access
 # define F_OK 2
 #elif defined __linux__
 # include <unistd.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 #endif
 
 #include "EncryptKit.h"
@@ -38,7 +40,11 @@ bool makePath(std::string path) {
     if (!makePath(pDir)) {
         return false;
     }
+#ifdef __linux__
+    return 0 == mkdir(path.c_str(), 0755);
+#else
     return 0 == mkdir(path.c_str());
+#endif
 }
 
 int main(int argc, char *argv[])

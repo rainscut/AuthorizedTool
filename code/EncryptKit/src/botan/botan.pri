@@ -1,13 +1,31 @@
-INCLUDEPATH += $$PWD
-DEPENDPATH += $$PWD
+win32 {
+INCLUDEPATH += $$PWD/msvc
+DEPENDPATH += $$PWD/msvc
 
 HEADERS += \
-    $$PWD/botan_all.h \
-    $$PWD/botan_all_internal.h
+    $$PWD/msvc/botan_all.h \
+    $$PWD/msvc/botan_all_internal.h
 
 SOURCES += \
-    $$PWD/botan_all.cpp
+    $$PWD/msvc/botan_all.cpp
+}
+
+unix {
+INCLUDEPATH += $$PWD/gcc
+DEPENDPATH += $$PWD/gcc
+
+HEADERS += \
+    $$PWD/gcc/botan_all.h \
+    $$PWD/gcc/botan_all_internal.h
+
+SOURCES += \
+    $$PWD/gcc/botan_all.cpp
+}
+
+
 
 DEFINES += BOTAN_DLL=
 
-LIBS += -ladvapi32 -luser32
+win32 {
+    LIBS += -ladvapi32 -luser32
+}
