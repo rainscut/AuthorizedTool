@@ -8,14 +8,14 @@ DESTDIR = $$VAR_BINDIR
 
 SOURCES += main.cpp
 
-INCLUDEPATH += ../EncryptKit/inc/
-LIBS += -L$$VAR_LIBSDIR -lEncryptKit
+INCLUDEPATH += ../LienceValidator/inc/
+LIBS += -L$$VAR_LIBSDIR -lLienceValidator
 
 win32 {
-    PRE_TARGETDEPS += $$VAR_LIBSDIR/EncryptKit.lib
+    PRE_TARGETDEPS += $$VAR_LIBSDIR/LienceValidator.lib
     LIBS += -ladvapi32 -luser32
 }
 unix {
-    PRE_TARGETDEPS += $$VAR_LIBSDIR/libEncryptKit.a
+    PRE_TARGETDEPS += $$VAR_LIBSDIR/libLienceValidator.a
     LIBS += -lpthread
 }

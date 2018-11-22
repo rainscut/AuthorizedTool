@@ -3,7 +3,8 @@
 
 #include <string>
 
-namespace cpu_tool {
+namespace util {
+namespace machine {
 
 typedef struct {
     std::string vendor;
@@ -12,7 +13,9 @@ typedef struct {
 } CpuInfo_t;
 
 void getCpuInfo(CpuInfo_t& info);
+bool getMacInfo(std::string& mac);
 
-} // namespace cpu_tool
+} // namespace machine
+} // namespace util
 
 #endif // CPUTOOL_H

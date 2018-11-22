@@ -19,3 +19,5 @@ include (inc/inc.pri)
 
 include (../EncryptKit/inc/inc.pri)
 include (../EncryptKit/src/src.pri)
+
+include (../util/util.pri)

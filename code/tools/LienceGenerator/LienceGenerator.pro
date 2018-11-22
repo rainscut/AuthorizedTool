@@ -6,8 +6,19 @@ CONFIG -= qt
 include (../../public.pri)
 DESTDIR = $$VAR_BINDIR
 
+
 SOURCES += \
     $$PWD/main.cpp
+
+include (../../util/util.pri)
+
+win32 {
+SOURCES += \
+    $$PWD/WinGetopt.cpp
+
+HEADERS += \
+    $$PWD/WinGetopt.h
+}
 
 
 # libs

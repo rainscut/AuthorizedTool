@@ -2,9 +2,10 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     EncryptKit \
+    LienceKit \
+    LienceValidator \
     tools \
-    test \
-    LienceKit
+    test
 
 
 CONFIG += ordered

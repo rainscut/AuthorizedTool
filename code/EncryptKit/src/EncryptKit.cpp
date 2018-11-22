@@ -1,6 +1,5 @@
 ﻿#include "EncryptKit.h"
 #include "botan_all.h"
-#include "CpuTool.h"
 
 #include <list>
 
@@ -38,7 +37,7 @@ bool rsaCreateKey(const char *pubKeyFile, const char *priKeyFile)
     }
 }
 
-bool rsaEncrypt(const char *pubKeyFile, const char *data,
+bool rsaEncrypt(const char *pubKeyFile, const void *data,
                 size_t len, std::vector<uint8_t>& output)
 {
     bool rv = true;
@@ -81,7 +80,7 @@ bool rsaEncrypt(const char *pubKeyFile, const char *data,
     return rv;
 }
 
-bool rsaEncrypt(const std::vector<uint8_t> &pubkey, const char *data,
+bool rsaEncrypt(const std::vector<uint8_t> &pubkey, const void *data,
                 size_t len, std::vector<uint8_t> &output)
 {
     bool rv = true;
@@ -124,7 +123,7 @@ bool rsaEncrypt(const std::vector<uint8_t> &pubkey, const char *data,
     return rv;
 }
 
-bool rsaDecrypt(const char *priKeyFile, const char *data,
+bool rsaDecrypt(const char *priKeyFile, const void *data,
                 size_t len, std::vector<uint8_t>& output)
 {
     bool rv = true;
@@ -166,7 +165,7 @@ bool rsaDecrypt(const char *priKeyFile, const char *data,
     return rv;
 }
 
-bool rsaDecrypt(const std::vector<uint8_t> &prikey, const char *data,
+bool rsaDecrypt(const std::vector<uint8_t> &prikey, const void *data,
                 size_t len, std::vector<uint8_t> &output)
 {
     bool rv = true;
@@ -209,7 +208,7 @@ bool rsaDecrypt(const std::vector<uint8_t> &prikey, const char *data,
     return rv;
 }
 
-bool base64Encode(const char *addr, size_t size, std::string &output)
+bool base64Encode(const void *addr, size_t size, std::string &output)
 {
     try {
         output = Botan::base64_encode((const uint8_t*)addr, size);
@@ -223,6 +222,10 @@ bool base64Encode(const char *addr, size_t size, std::string &output)
 bool base64Decode(const std::string &str, std::vector<uint8_t>& output)
 {
     try {
+        if (0 != str.size() % 4) { // base64 字符串长度必须是4的倍数
+            return false;
+        }
+
         auto tmp = Botan::base64_decode(str);
         output.resize(tmp.size());
         memcpy(output.data(), tmp.data(), tmp.size() * sizeof(uint8_t));
@@ -233,14 +236,7 @@ bool base64Decode(const std::string &str, std::vector<uint8_t>& output)
     }
 }
 
-std::string getCpuId()
-{
-    cpu_tool::CpuInfo_t info;
-    cpu_tool::getCpuInfo(info);
-    return info.guid;
-}
-
-bool md5Hash(const char *data, size_t len, std::string &output)
+bool md5Hash(const void *data, size_t len, std::string &output)
 {
     try {
         Botan::MD5 hash;
@@ -257,7 +253,7 @@ bool md5Hash(const char *data, size_t len, std::string &output)
     }
 }
 
-bool sha256Hash(const char *data, size_t len, std::string &output)
+bool sha256Hash(const void *data, size_t len, std::string &output)
 {
     try {
         Botan::SHA_256 hash;
@@ -274,7 +270,7 @@ bool sha256Hash(const char *data, size_t len, std::string &output)
     }
 }
 
-bool sha224Hash(const char *data, size_t len, std::string &output)
+bool sha224Hash(const void *data, size_t len, std::string &output)
 {
     try {
         Botan::SHA_224 hash;

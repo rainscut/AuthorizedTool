@@ -2,7 +2,9 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     RsaKeyGenerator \
-    LienceGenerator
+    LienceGenerator \
+    EncryptToBase64 \
+    MachineCode
     
 
 
